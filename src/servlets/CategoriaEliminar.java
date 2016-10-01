@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Locale.Category;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import model.Category;
 
 /**
  * Servlet implementation class CategoriaEliminar
@@ -31,7 +31,7 @@ public class CategoriaEliminar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Dao<Category> categoriaDao = new Dao<>(Category.class);
+			Dao<Category> categoriaDao = new Dao<Category>(Category.class);
 			boolean flag = categoriaDao.eliminar( Integer.parseInt(request.getParameter("categoria")) );
 			
 			if(flag){

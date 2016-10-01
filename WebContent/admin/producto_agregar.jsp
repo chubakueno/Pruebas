@@ -1,19 +1,22 @@
 <%@page import="model.Category"%>
 <%@page import="model.Provider"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-		
+
+<%@ include file="includes/header.jsp" %>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<%@ include file="includes/menu_superior.jsp" %>
+</nav>
+<div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+        	<%@ include file="includes/menu_lateral.jsp" %>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        
+        
 		<h2>Registro de Productos</h2>
 		<form  method="post"
-				action="<%=getServletContext().getContextPath() %>/ProductoEditar">
+				action="<%=getServletContext().getContextPath() %>/ServletProducto">
 
 			<div class="form-group">
 				<label>Nombre:</label>
@@ -52,6 +55,6 @@
 			
 		</form>
 		
-		
-</body>
-</html>
+      	</div>
+	</div>
+</div>

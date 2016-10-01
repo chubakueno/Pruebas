@@ -9,10 +9,28 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-
 public class Dao<T>{
 	Class<T> type;
 	public Dao(Class<T> type) { this.type = type; }
+	public boolean agregar(T categoria) {
+		try {
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");
+			EntityManager em = emf.createEntityManager();
+			
+			EntityTransaction et = em.getTransaction();
+			et.begin();
+			em.persist(categoria);
+			et.commit();
+			
+			return true;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.print(e.getMessage());
+			
+			return false;
+		}
+	}
 	public boolean eliminar(int id) {
 		try {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");

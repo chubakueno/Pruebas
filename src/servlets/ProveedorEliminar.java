@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.net.ssl.internal.ssl.Provider;
-
 import dao.Dao;
+import model.Provider;
 
 /**
  * Servlet implementation class ProveedorEliminar

@@ -30,7 +30,7 @@ public class ProductoEliminar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Dao<Product> productoDao = new Dao<Product>(Product.class);
+			Dao<Product> productoDao = new Dao<>(Product.class);
 			boolean flag = productoDao.eliminar( Integer.parseInt(request.getParameter("producto")) );
 			
 			if(flag){

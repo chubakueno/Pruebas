@@ -35,10 +35,10 @@ public class ProductoEditar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			Dao<Provider> provider = new Dao<>(Provider.class);
-			List<model.Provider> proveedores = provider.listar();
+			Dao<Provider> proveedorDao = new Dao<>(Provider.class);
+			List<model.Provider> proveedores = proveedorDao.listar();
 			
-			Dao<Category> categoriaDao = new Dao<>(Category.class);
+			Dao<Category> categoriaDao = new Dao<Category>(Category.class);
 			List<model.Category> categorias = categoriaDao.listar();
 			
 			request.setAttribute("categorias", categorias);			
@@ -52,8 +52,9 @@ public class ProductoEditar extends HttpServlet {
 			request.setAttribute("producto", productoEntidad);
 			
 			request.getRequestDispatcher("/admin/producto_editar.jsp").forward(request, response);
+			
 		} catch (Exception e) {
-			request.getRequestDispatcher("/admin/producto_agregar.jsp").forward(request, response);
+			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
 		
@@ -65,8 +66,8 @@ public class ProductoEditar extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
+			int id = Integer.parseInt(request.getParameter("campoID"));
 			String nombre = request.getParameter("campoNombre");
-			String id = request.getParameter("id");
 			float monto = Float.parseFloat(request.getParameter("campoMonto"));
 			int proveedorId = Integer.parseInt(request.getParameter("listaProveedores"));
 			int categoriaId = Integer.parseInt(request.getParameter("listaCategorias"));
@@ -74,16 +75,17 @@ public class ProductoEditar extends HttpServlet {
 			Dao<Provider> providerDao = new Dao<>(Provider.class);
 			Provider p = providerDao.Buscar(proveedorId);
 			
-			Dao<Category> categoriaDao = new Dao<Category>(Category.class);
+			Dao<Category> categoriaDao = new Dao<>(Category.class);
 			Category c = categoriaDao.Buscar(categoriaId);
 			
 			Product producto = new Product();
+			producto.setIdProduct(id);
 			producto.setDescription(nombre);
 			producto.setMount(monto);
 			producto.setCategory(c);
 			producto.setProvider(p);
-			producto.setIdProduct(Integer.parseInt(id));
-			Dao<Product> dao = new Dao<Product>(Product.class);
+			
+			Dao<Product> dao = new Dao<>(Product.class);
 			boolean flag = dao.actualizar(producto);
 			
 			if(flag){

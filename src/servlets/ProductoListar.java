@@ -32,8 +32,9 @@ public class ProductoListar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Dao<Product> dao = new Dao<Product>(Product.class);
+		Dao<Product> dao = new Dao<>(Product.class);
 		List<Product> productos = dao.listar();
+		
 			
 		request.setAttribute("productos", productos);
 		

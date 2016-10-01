@@ -1,27 +1,33 @@
 <%@page import="model.Provider"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ include file="includes/header.jsp" %>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<%@ include file="includes/menu_superior.jsp" %>
+</nav>
+<div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+        	<%@ include file="includes/menu_lateral.jsp" %>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        
+        
 		<%Provider proveedor = (Provider)request.getAttribute("proveedor"); %>
-		<h2>Registro de Proveedores</h2>
+		<h2>Editando el Proveedors</h2>
 		<form  method="post"
 				action="<%=getServletContext().getContextPath() %>/ProveedorEditar">
+	
 			
 			<div class="form-group">
 				<label>Nombre:</label>
-				<input type="text" name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa el nombre" value="<%= proveedor.getName()%>">
-				<input type="hidden" name="id" id="id" value="<%= proveedor.getIdProvider()%>">
+				<input type="text" name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa el nombre" value="<%=proveedor.getName()%>">
 			</div>
 			
-			<button type="submit" class="btn btn-default">Registrar Proveedor</button>
+			<input type="hidden"  name="campoID" class="form-control" id="campoID" value="<%=proveedor.getIdProvider()%>">
+			
+			<button type="submit" class="btn btn-default">Actualizar Proveedor</button>
 			
 		</form>
 
-</body>
-</html>
+      	</div>
+	</div>
+</div>

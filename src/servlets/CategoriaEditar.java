@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
 import model.Category;
+import model.Provider;
 
 /**
  * Servlet implementation class CategoriaEditar
@@ -32,7 +33,7 @@ public class CategoriaEditar extends HttpServlet {
 		try {
 			
 			String categoriaID = request.getParameter("categoria");
-			System.out.println(categoriaID);
+			
 			Dao<Category> categoria = new Dao<Category>(Category.class);
 			Category categoriaEntidad = categoria.Buscar(Integer.parseInt(categoriaID));
 			
@@ -50,8 +51,29 @@ public class CategoriaEditar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		try{
+			String nombre = request.getParameter("campoNombre");
+			int id = Integer.parseInt(request.getParameter("campoID"));
+			
+			Category categoria = new Category();
+			categoria.setName(nombre);
+			categoria.setIdCategory(id);
+			
+			Dao<Category> dao = new Dao<Category>(Category.class);
+			boolean flag = dao.actualizar(categoria);
+
+			if(flag){
+				request.setAttribute("mensaje", "Categoria actualizada");
+			}else{
+				request.setAttribute("mensaje", "Ocurrió un error");
+			}
+			
+			request.getRequestDispatcher("/admin/resultado.jsp").forward(request, response);
+			
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
