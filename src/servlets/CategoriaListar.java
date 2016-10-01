@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CategoriaDao;
-import dao.ICategoriaDao;
 
 /**
  * Servlet implementation class CategoriaListar
@@ -32,7 +31,7 @@ public class CategoriaListar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
-			ICategoriaDao categoriaDao = new CategoriaDao();
+			CategoriaDao categoriaDao = new CategoriaDao();
 			List<model.Category> categorias = categoriaDao.listar();
 			
 			request.setAttribute("categorias", categorias);			

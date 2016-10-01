@@ -9,12 +9,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import java.sql.*;
-
-import model.Product;
 import model.Provider;
 
-public class ProveedorDao implements IProveedorDao{
+public class ProveedorDao{
 
 	public List<Provider> listar() {
 
@@ -77,7 +74,6 @@ public class ProveedorDao implements IProveedorDao{
 	}
 
 
-	@Override
 	public Provider Buscar(int id) {
 		List<Provider> proveedores = new ArrayList<Provider>();
 		Provider p = null;
@@ -85,9 +81,10 @@ public class ProveedorDao implements IProveedorDao{
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");
 			EntityManager em = emf.createEntityManager();
 			
-			TypedQuery<Provider> tq = em.createNamedQuery("Provider.findAll",Provider.class);
+			TypedQuery<Provider> tq = em.createNamedQuery("Provider.findId",Provider.class);
+			tq.setParameter("id", id);
 			proveedores = tq.getResultList();
-			p = proveedores.get(id-1);
+			p = proveedores.get(0);
 			
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -96,8 +93,6 @@ public class ProveedorDao implements IProveedorDao{
 		return p;
 	}
 
-
-	@Override
 	public boolean actualizar(Provider provider) {
 		try {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");

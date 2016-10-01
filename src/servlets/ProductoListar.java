@@ -9,12 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CategoriaDao;
-import dao.ICategoriaDao;
-import dao.IProductoDao;
-import dao.IProveedorDao;
 import dao.ProductoDao;
-import dao.ProveedorDao;
 import model.Product;
 
 /**
@@ -37,9 +32,8 @@ public class ProductoListar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		IProductoDao dao = new ProductoDao();
+		ProductoDao dao = new ProductoDao();
 		List<Product> productos = dao.listar();
-		
 			
 		request.setAttribute("productos", productos);
 		

@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CategoriaDao;
-import dao.ICategoriaDao;
-import dao.IProductoDao;
-import dao.IProveedorDao;
 import dao.ProductoDao;
 import dao.ProveedorDao;
 import model.Category;
@@ -40,10 +37,10 @@ public class ProductoEditar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			IProveedorDao proveedorDao = new ProveedorDao();
+			ProveedorDao proveedorDao = new ProveedorDao();
 			List<model.Provider> proveedores = proveedorDao.listar();
 			
-			ICategoriaDao categoriaDao = new CategoriaDao();
+			CategoriaDao categoriaDao = new CategoriaDao();
 			List<model.Category> categorias = categoriaDao.listar();
 			
 			request.setAttribute("categorias", categorias);			
@@ -51,7 +48,7 @@ public class ProductoEditar extends HttpServlet {
 			
 			String productoID = request.getParameter("producto");
 			
-			IProductoDao producto = new ProductoDao();
+			ProductoDao producto = new ProductoDao();
 			Product productoEntidad = producto.Buscar(Integer.parseInt(productoID));
 			
 			request.setAttribute("producto", productoEntidad);
@@ -76,10 +73,10 @@ public class ProductoEditar extends HttpServlet {
 			int proveedorId = Integer.parseInt(request.getParameter("listaProveedores"));
 			int categoriaId = Integer.parseInt(request.getParameter("listaCategorias"));
 			
-			IProveedorDao providerDao = new ProveedorDao();
+			ProveedorDao providerDao = new ProveedorDao();
 			Provider p = providerDao.Buscar(proveedorId);
 			
-			ICategoriaDao categoriaDao = new CategoriaDao();
+			CategoriaDao categoriaDao = new CategoriaDao();
 			Category c = categoriaDao.Buscar(categoriaId);
 			
 			Product producto = new Product();
@@ -88,7 +85,7 @@ public class ProductoEditar extends HttpServlet {
 			producto.setCategory(c);
 			producto.setProvider(p);
 			
-			IProductoDao dao = new ProductoDao();
+			ProductoDao dao = new ProductoDao();
 			boolean flag = dao.actualizar(producto);
 			
 			if(flag){

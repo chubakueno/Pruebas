@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CategoriaDao;
-import dao.ICategoriaDao;
-import dao.IProductoDao;
-import dao.ProductoDao;
 
 /**
  * Servlet implementation class CategoriaEliminar
@@ -32,7 +29,7 @@ public class CategoriaEliminar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			ICategoriaDao categoriaDao = new CategoriaDao();
+			CategoriaDao categoriaDao = new CategoriaDao();
 			boolean flag = categoriaDao.eliminar( Integer.parseInt(request.getParameter("categoria")) );
 			
 			if(flag){

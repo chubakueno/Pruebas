@@ -11,9 +11,8 @@ import javax.persistence.TypedQuery;
 
 import model.*;
 
-public class ProductoDao implements IProductoDao{
+public class ProductoDao{
 
-	@Override
 	public List<Product> listar() {
 		List<Product> productos = new ArrayList<Product>();
 		
@@ -31,7 +30,6 @@ public class ProductoDao implements IProductoDao{
 		return productos;
 	}
 
-	@Override
 	public boolean agregar(Product producto) {
 		
 		try {
@@ -53,7 +51,6 @@ public class ProductoDao implements IProductoDao{
 		}
 	}
 
-	@Override
 	public boolean eliminar(int id) {
 		try {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");
@@ -74,16 +71,13 @@ public class ProductoDao implements IProductoDao{
 		}
 	}
 
-	@Override
 	public Product Buscar(int id) {
 		// TODO Auto-generated method stub
 		List<Product> productos = new ArrayList<Product>();
 		Product p = null;
-		
 		try{
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");
 			EntityManager em = emf.createEntityManager();
-			
 			TypedQuery<Product> tq = em.createNamedQuery("Product.findId",Product.class);
 			tq.setParameter("id", id);
 			productos = tq.getResultList();
@@ -96,7 +90,6 @@ public class ProductoDao implements IProductoDao{
 		return p;
 	}
 
-	@Override
 	public boolean actualizar(Product producto) {
 		try {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");

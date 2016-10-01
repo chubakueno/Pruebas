@@ -8,11 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CategoriaDao;
-import dao.ICategoriaDao;
-import dao.IProveedorDao;
-import dao.ProveedorDao;
 import model.Category;
-import model.Provider;
 
 /**
  * Servlet implementation class CategoriaEditar
@@ -37,7 +33,7 @@ public class CategoriaEditar extends HttpServlet {
 			
 			String categoriaID = request.getParameter("categoria");
 			
-			ICategoriaDao categoria = new CategoriaDao();
+			CategoriaDao categoria = new CategoriaDao();
 			Category categoriaEntidad = categoria.Buscar(Integer.parseInt(categoriaID));
 			
 			request.setAttribute("categoria", categoriaEntidad);

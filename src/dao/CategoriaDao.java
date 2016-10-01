@@ -10,12 +10,9 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import model.Category;
-import model.Product;
-import model.Provider;
 
-public class CategoriaDao implements ICategoriaDao{
+public class CategoriaDao{
 
-	@Override
 	public List<Category> listar() {
 
 		List<Category> categorias = new ArrayList<Category>();
@@ -35,7 +32,6 @@ public class CategoriaDao implements ICategoriaDao{
 		
 	}
 
-	@Override
 	public boolean agregar(Category categoria) {
 		try {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");
@@ -56,7 +52,6 @@ public class CategoriaDao implements ICategoriaDao{
 		}
 	}
 
-	@Override
 	public boolean eliminar(int id) {
 		
 		try {
@@ -78,7 +73,6 @@ public class CategoriaDao implements ICategoriaDao{
 		}
 	}
 
-	@Override
 	public Category Buscar(int id) {
 		
 		List<Category> categorias = new ArrayList<Category>();
