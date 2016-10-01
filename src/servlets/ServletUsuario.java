@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.Dao;
+import model.User;
+
+
 /**
  * Servlet implementation class ServletUsuario
  */
@@ -27,11 +31,6 @@ public class ServletUsuario extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		HttpSession sesion = request.getSession();
-		sesion.removeAttribute("sesAdmin");
-		sesion.invalidate();
-		
 		request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
 		
 	}
@@ -40,8 +39,21 @@ public class ServletUsuario extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String codigo = request.getParameter("campoCorreo");
+		String contraseña = request.getParameter("campoClave");
+		
+		Dao<User> dao = new Dao<>(User.class);
+		System.out.println(codigo+"/"+contraseña);
+		User admin = dao.login(codigo, contraseña);
+		if(admin != null){
+			HttpSession sesion = request.getSession();
+			sesion.setAttribute("sesAdmin", admin);
+			request.getRequestDispatcher("/Principal").forward(request, response);
+		}else{
+			
+			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+		}
 	}
 
 }

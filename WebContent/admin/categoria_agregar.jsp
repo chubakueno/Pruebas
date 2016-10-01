@@ -16,14 +16,21 @@
 
 	<h2>Registro de Categorias</h2>
 		<form  method="post"
+				name="formulario"
 				action="<%=getServletContext().getContextPath() %>/ServletCategoria">
 
 			<div class="form-group">
 				<label>Nombre:</label>
-				<input type="text" name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa el nombre">
+				<input type="text"
+				required="true";
+				oninvalid="this.setCustomValidity('Falta llenar el campo Descripcion');" 
+				oninput="setCustomValidity('')"
+				name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa la descripcion">
 			</div>
 			
-			<button type="submit" class="btn btn-default">Registrar Categoria</button>
+			<button type="submit"
+			onclick="return confirm('¿Esta seguro de registrar esta categoria?')"
+			class="btn btn-default">Agregar</button>
 			
 		</form>
 

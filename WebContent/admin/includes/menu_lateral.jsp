@@ -1,7 +1,7 @@
 
 <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Producto <span class="sr-only">(current)</span></a></li>
-            <li><a href="<%=getServletContext().getContextPath()%>/ServletProducto">Agregar Producto</a></li>
+            <li><a href="<%=getServletContext().getContextPath()%>/ServletProducto">Agregar</a></li>
             <li><a href="<%=getServletContext().getContextPath()%>/ProductoListar">Listar Productos</a></li>
 </ul>
 <ul class="nav nav-sidebar">

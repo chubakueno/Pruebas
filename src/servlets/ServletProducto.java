@@ -77,7 +77,7 @@ public class ServletProducto extends HttpServlet {
 			boolean flag = dao.agregar(producto);
 			
 			if(flag){
-				request.setAttribute("mensaje", "Producto guardado");
+				request.setAttribute("mensaje", "El producto se guardo satisfactoriamente");
 			}else{
 				request.setAttribute("mensaje", "Ocurrió un error");
 			}

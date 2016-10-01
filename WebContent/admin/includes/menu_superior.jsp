@@ -8,14 +8,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">UPC</a>
+          <a class="navbar-brand" href="#">DEISW.WEB</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Hola </a></li>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Mis datos</a></li>
-            <li><a href="">Cerrar sesión</a></li>
+            <li><a href="<%=getServletContext().getContextPath() %>/Principal">Inicio</a></li>
+            <li><a
+            onclick="cerrarSesion()"
+            >Cerrar sesión</a></li>
           </ul>
         </div>
       </div>

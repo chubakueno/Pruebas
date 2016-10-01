@@ -25,12 +25,20 @@
 
 			<div class="form-group">
 				<label>Nombre:</label>
-				<input type="text" name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa el nombre" value="<%=producto.getDescription()%>">
+				<input type="text" name="campoNombre"
+				required="true";
+				oninvalid="this.setCustomValidity('Falta campo Descripcion');" 
+				oninput="setCustomValidity('')"
+				class="form-control" id="campoNombreID" placeholder="Ingresa la Descripcion" value="<%=producto.getDescription()%>">
 			</div>
 			
 			<div class="form-group">
 				<label>Monto:</label>
-				<input type="text" name="campoMonto" class="form-control" id="campoMontoID" placeholder="Ingresa el monto" value="<%=producto.getMount()%>">
+				<input type="text"
+				required="true";
+				oninvalid="this.setCustomValidity('Falta llenar el campo Monto');" 
+				oninput="setCustomValidity('')"
+				name="campoMonto" class="form-control" id="campoMontoID" placeholder="Ingresa el monto" value="<%=producto.getMount()%>">
 			</div>
 			
 		
@@ -59,7 +67,7 @@
 			<%//Guardando el ID del Producto%>
 			<input type="hidden"  name="campoID" class="form-control" id="campoID" value="<%=producto.getIdProduct()%>">
 			
-			<button type="submit" class="btn btn-default">Actualizar Producto</button>
+			<button type="submit" onclick="return confirm('¿Esta seguro de actualizar este producto?')" class="btn btn-default">Actualizar Producto</button>
 			
 		</form>
 		

@@ -12,19 +12,23 @@
         
         
 		<%Provider proveedor = (Provider)request.getAttribute("proveedor"); %>
-		<h2>Editando el Proveedors</h2>
+		<h2>Editando el Proveedor</h2>
 		<form  method="post"
 				action="<%=getServletContext().getContextPath() %>/ProveedorEditar">
 	
 			
 			<div class="form-group">
 				<label>Nombre:</label>
-				<input type="text" name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa el nombre" value="<%=proveedor.getName()%>">
+				<input type="text"
+				required="true";
+				oninvalid="this.setCustomValidity('Falta llenar el campo Descripcion');" 
+				oninput="setCustomValidity('')"
+				name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa la Descripcion" value="<%=proveedor.getName()%>">
 			</div>
 			
 			<input type="hidden"  name="campoID" class="form-control" id="campoID" value="<%=proveedor.getIdProvider()%>">
 			
-			<button type="submit" class="btn btn-default">Actualizar Proveedor</button>
+			<button type="submit" onclick="return confirm('¿Esta seguro de actualizar este proveedor?')" class="btn btn-default">Actualizar Proveedor</button>
 			
 		</form>
 

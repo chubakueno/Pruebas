@@ -18,12 +18,16 @@
 
 			<div class="form-group">
 				<label>Nombre:</label>
-				<input type="text" name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa el nombre" value="<%=categoria.getName()%>">
+				<input type="text" name="campoNombre"
+				oninvalid="this.setCustomValidity('Falta llenar el campo Descripcion');" 
+				oninput="setCustomValidity('')"
+				required="true"
+				class="form-control" id="campoNombreID" placeholder="Ingresa la descripcion" value="<%=categoria.getName()%>">
 			</div>
 			
 			<input type="hidden"  name="campoID" class="form-control" id="campoID" value="<%=categoria.getIdCategory()%>">
 			
-			<button type="submit" class="btn btn-default">Actualizar Categoria</button>
+			<button type="submit" onclick="return confirm('¿Esta seguro de actualizar esta categoria?')" class="btn btn-default">Actualizar Categoria</button>
 			
 		</form>
 

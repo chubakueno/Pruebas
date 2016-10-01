@@ -1,27 +1,24 @@
 package servlets;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dao.Dao;
-import model.Category;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class CategoriaEliminar
+ * Servlet implementation class Principal
  */
-@WebServlet("/CategoriaEliminar")
-public class CategoriaEliminar extends HttpServlet {
+@WebServlet("/Principal")
+public class Principal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CategoriaEliminar() {
+    public Principal() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,29 +27,24 @@ public class CategoriaEliminar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			Dao<Category> categoriaDao = new Dao<Category>(Category.class);
-			boolean flag = categoriaDao.eliminar( Integer.parseInt(request.getParameter("categoria")) );
-			
-			if(flag){
-				request.setAttribute("mensaje", "Categoria eliminada");
-			}else{
-				request.setAttribute("mensaje", "ocurrió un error");
-			}
-			request.getRequestDispatcher("/admin/resultado.jsp").forward(request, response);
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.print(e.getMessage());
-		}
+		HttpSession sesion = request.getSession(false);
+		/*if(sesion==null||sesion.getAttribute("sesAdmin")==null){
+			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+			return;
+		}*/
+		request.getRequestDispatcher("/admin/principal.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession sesion = request.getSession(false);
+		/*if(sesion==null||sesion.getAttribute("sesAdmin")==null){
+			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+			return;
+		}*/
+		request.getRequestDispatcher("/admin/principal.jsp").forward(request, response);
 	}
 
 }

@@ -17,10 +17,14 @@
 
 			<div class="form-group">
 				<label>Nombre:</label>
-				<input type="text" name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa el nombre">
+				<input type="text"
+				required="true";
+				oninvalid="this.setCustomValidity('Falta llenar el campo Descripcion');" 
+				oninput="setCustomValidity('')"
+				name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresar la Descripcion">
 			</div>
 			
-			<button type="submit" class="btn btn-default">Registrar Proveedor</button>
+			<button type="submit" onclick="return confirm('¿Esta seguro de registrar este proveedor?')" class="btn btn-default">Crear</button>
 			
 		</form>
 	

@@ -89,7 +89,7 @@ public class ProductoEditar extends HttpServlet {
 			boolean flag = dao.actualizar(producto);
 			
 			if(flag){
-				request.setAttribute("mensaje", "Producto actualizado");
+				request.setAttribute("mensaje", "Producto actualizado exitosamente");
 			}else{
 				request.setAttribute("mensaje", "Ocurrió un error");
 			}
@@ -97,6 +97,7 @@ public class ProductoEditar extends HttpServlet {
 			request.getRequestDispatcher("/admin/resultado.jsp").forward(request, response);
 			
 		}catch(Exception e){
+			request.getRequestDispatcher("/Principal").forward(request, response);
 			System.out.println(e.getMessage());
 		}
 	}

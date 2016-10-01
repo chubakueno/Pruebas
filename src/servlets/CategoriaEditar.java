@@ -6,10 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Dao;
 import model.Category;
-import model.Provider;
 
 /**
  * Servlet implementation class CategoriaEditar
@@ -31,7 +31,11 @@ public class CategoriaEditar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			
+			HttpSession sesion = request.getSession(false);
+			/*if(sesion==null||sesion.getAttribute("sesAdmin")==null){
+				request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+				retursn;
+			}*/
 			String categoriaID = request.getParameter("categoria");
 			
 			Dao<Category> categoria = new Dao<Category>(Category.class);

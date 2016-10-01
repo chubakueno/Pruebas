@@ -1,5 +1,9 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +13,47 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import model.User;
+
 public class Dao<T>{
 	Class<T> type;
 	public Dao(Class<T> type) { this.type = type; }
+	public static Connection obtenerConexion(){
+		Connection conexion = null;
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/mydb";
+			conexion = DriverManager.getConnection(url, "root", "root");
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return conexion;
+	}
+	public User login(String codigo, String contraseña) {	
+		User admin = null;
+		try {
+			Connection con = Dao.obtenerConexion();
+			Statement stmt = con.createStatement();
+			String querystmt="select * from user"
+					+ " where Username='"+codigo+"' and Pass='"+contraseña+"' ";
+			ResultSet rs = stmt.executeQuery(querystmt);
+			System.out.println(querystmt);
+			if(rs.next()){
+				System.out.println("ok");
+				admin = new User();
+				admin.setIdUser(rs.getInt("idUser"));
+				admin.setUsername(rs.getString("Username"));
+				admin.setPass(rs.getString("Pass"));
+				admin.setRole(rs.getString("Role"));
+			}
+			System.out.println(":/");
+			rs.close();
+			con.close();	
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return admin;	
+	}
 	public boolean agregar(T categoria) {
 		try {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");
