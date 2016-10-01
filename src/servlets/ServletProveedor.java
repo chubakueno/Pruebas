@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import dao.Dao;
 import model.Provider;
 
 /**
- * Servlet implementation class ProveedorListar
+ * Servlet implementation class ServletProveedor
  */
-@WebServlet("/ProveedorListar")
-public class ProveedorListar extends HttpServlet {
+@WebServlet("/ServletProveedor")
+public class ServletProveedor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProveedorListar() {
+    public ServletProveedor() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +30,45 @@ public class ProveedorListar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Dao<Provider> dao = new Dao<>(Provider.class);
-		List<Provider> proveedores = dao.listar();
-		
+
+		try{
 			
-		request.setAttribute("proveedores", proveedores);
+			request.getRequestDispatcher("/admin/proveedor_agregar.jsp").forward(request, response);
+			
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		
-		request.getRequestDispatcher("/admin/proveedor_listar.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		try{
+			String nombre = request.getParameter("campoNombre");
+			
+			Provider proveedor = new Provider();
+			proveedor.setName(nombre);			
+			
+
+			Dao<Provider> proveedorDao = new Dao<>(Provider.class);
+			boolean flag = proveedorDao.agregar(proveedor);
+			
+			if(flag){
+				request.setAttribute("mensaje", "Proveedor guardado");
+			}else{
+				request.setAttribute("mensaje", "Ocurrió un error");
+			}
+			
+			request.getRequestDispatcher("/admin/resultado.jsp").forward(request, response);
+			
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+		
 	}
 
 }

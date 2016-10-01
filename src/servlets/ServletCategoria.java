@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import model.Provider;
+import model.Category;
 
 /**
- * Servlet implementation class ProveedorEditar
+ * Servlet implementation class ServletCategoria
  */
-@WebServlet("/ProveedorEditar")
-public class ProveedorEditar extends HttpServlet {
+@WebServlet("/ServletCategoria")
+public class ServletCategoria extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProveedorEditar() {
+    public ServletCategoria() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +30,12 @@ public class ProveedorEditar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		try {
+		try{
+			request.getRequestDispatcher("/admin/categoria_agregar.jsp").forward(request, response);
 			
-			String proveedorID = request.getParameter("proveedor");
-			
-			Dao<Provider> proveedor = new Dao<>(Provider.class);
-			Provider proveedorEntidad = proveedor.Buscar(Integer.parseInt(proveedorID));
-			
-			request.setAttribute("proveedor", proveedorEntidad);
-
-			request.getRequestDispatcher("/admin/proveedor_editar.jsp").forward(request, response);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
+		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		
-		
 	}
 
 	/**
@@ -57,17 +45,16 @@ public class ProveedorEditar extends HttpServlet {
 
 		try{
 			String nombre = request.getParameter("campoNombre");
-			int id = Integer.parseInt(request.getParameter("campoID"));
 			
-			Provider proveedor  = new Provider();
-			proveedor.setName(nombre);
-			proveedor.setIdProvider(id);
+			Category categoria = new Category();
+			categoria.setName(nombre);		
 			
-			Dao<Provider> dao = new Dao<>(Provider.class);
-			boolean flag = dao.actualizar(proveedor);
+
+			Dao<Category> categoriaDao = new Dao<Category>(Category.class);
+			boolean flag = categoriaDao.agregar(categoria);
 			
 			if(flag){
-				request.setAttribute("mensaje", "Proveedor actualizado");
+				request.setAttribute("mensaje", "Categoria guardada");
 			}else{
 				request.setAttribute("mensaje", "Ocurrió un error");
 			}
@@ -77,7 +64,6 @@ public class ProveedorEditar extends HttpServlet {
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		
 		
 	}
 

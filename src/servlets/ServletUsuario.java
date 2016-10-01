@@ -1,28 +1,24 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dao.Dao;
-import model.Provider;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ProveedorListar
+ * Servlet implementation class ServletUsuario
  */
-@WebServlet("/ProveedorListar")
-public class ProveedorListar extends HttpServlet {
+@WebServlet("/ServletUsuario")
+public class ServletUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProveedorListar() {
+    public ServletUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +27,13 @@ public class ProveedorListar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Dao<Provider> dao = new Dao<>(Provider.class);
-		List<Provider> proveedores = dao.listar();
+
+		HttpSession sesion = request.getSession();
+		sesion.removeAttribute("sesAdmin");
+		sesion.invalidate();
 		
-			
-		request.setAttribute("proveedores", proveedores);
+		request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
 		
-		request.getRequestDispatcher("/admin/proveedor_listar.jsp").forward(request, response);
 	}
 
 	/**
