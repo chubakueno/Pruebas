@@ -20,6 +20,7 @@
 			<div class="form-group">
 				<label>Nombre:</label>
 				<input type="text" name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa el nombre" value="<%=producto.getDescription()%>">
+				<input type="hidden" name="id" id="id" value="<%= producto.getIdProduct()%>">
 			</div>
 			
 			<div class="form-group">

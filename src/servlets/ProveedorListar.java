@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ProveedorDao;
+import dao.Dao;
 import model.Provider;
 
 /**
@@ -31,7 +31,7 @@ public class ProveedorListar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProveedorDao dao = new ProveedorDao();
+		Dao<Provider> dao = new Dao<>(Provider.class);
 		List<Provider> proveedores = dao.listar();
 		
 			

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ProveedorDao;
+import dao.Dao;
 import model.Provider;
 
 /**
@@ -35,7 +35,7 @@ public class ProveedorEditar extends HttpServlet {
 			
 			String proveedorID = request.getParameter("proveedor");
 			
-			ProveedorDao proveedor = new ProveedorDao();
+			Dao<Provider> proveedor = new Dao<>(Provider.class);
 			Provider proveedorEntidad = proveedor.Buscar(Integer.parseInt(proveedorID));
 			
 			request.setAttribute("proveedor", proveedorEntidad);
@@ -57,11 +57,12 @@ public class ProveedorEditar extends HttpServlet {
 
 		try{
 			String nombre = request.getParameter("campoNombre");
-
+			String id = request.getParameter("id");
 			Provider proveedor  = new Provider();
+			proveedor.setIdProvider(Integer.parseInt(id));
 			proveedor.setName(nombre);
-			
-			ProveedorDao dao = new ProveedorDao();
+			System.out.println(id);
+			Dao<Provider> dao = new Dao<Provider>(Provider.class);
 			boolean flag = dao.actualizar(proveedor);
 			
 			if(flag){

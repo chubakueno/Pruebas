@@ -13,7 +13,7 @@
 		
 		<h2>Registro de Productos</h2>
 		<form  method="post"
-				action="<%=getServletContext().getContextPath() %>/ServletProducto">
+				action="<%=getServletContext().getContextPath() %>/ProductoEditar">
 
 			<div class="form-group">
 				<label>Nombre:</label>

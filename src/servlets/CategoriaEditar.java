@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CategoriaDao;
+import dao.Dao;
 import model.Category;
 
 /**
@@ -32,8 +32,8 @@ public class CategoriaEditar extends HttpServlet {
 		try {
 			
 			String categoriaID = request.getParameter("categoria");
-			
-			CategoriaDao categoria = new CategoriaDao();
+			System.out.println(categoriaID);
+			Dao<Category> categoria = new Dao<Category>(Category.class);
 			Category categoriaEntidad = categoria.Buscar(Integer.parseInt(categoriaID));
 			
 			request.setAttribute("categoria", categoriaEntidad);

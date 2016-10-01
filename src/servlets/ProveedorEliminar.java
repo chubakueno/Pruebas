@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ProveedorDao;
+import com.sun.net.ssl.internal.ssl.Provider;
+
+import dao.Dao;
 
 /**
  * Servlet implementation class ProveedorEliminar
@@ -29,7 +31,7 @@ public class ProveedorEliminar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			ProveedorDao proveedorDao = new ProveedorDao();
+			Dao<Provider> proveedorDao = new Dao<>(Provider.class);
 			boolean flag = proveedorDao.eliminar( Integer.parseInt(request.getParameter("proveedor")) );
 			
 			if(flag){

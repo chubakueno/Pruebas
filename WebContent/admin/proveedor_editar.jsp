@@ -11,11 +11,12 @@
 		<%Provider proveedor = (Provider)request.getAttribute("proveedor"); %>
 		<h2>Registro de Proveedores</h2>
 		<form  method="post"
-				action="<%=getServletContext().getContextPath() %>/ServletProveedor">
-
+				action="<%=getServletContext().getContextPath() %>/ProveedorEditar">
+			
 			<div class="form-group">
 				<label>Nombre:</label>
 				<input type="text" name="campoNombre" class="form-control" id="campoNombreID" placeholder="Ingresa el nombre" value="<%= proveedor.getName()%>">
+				<input type="hidden" name="id" id="id" value="<%= proveedor.getIdProvider()%>">
 			</div>
 			
 			<button type="submit" class="btn btn-default">Registrar Proveedor</button>

@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="<%=getServletContext().getContextPath() %>/ServletProducto">Registrar Producto</a>
-	<a href="<%=getServletContext().getContextPath() %>/ServletCategoria">Registrar Categoria</a>
-	<a href="<%=getServletContext().getContextPath() %>/ServletProveedor">Registrar Proveedor</a>
+	<a href="<%=getServletContext().getContextPath() %>/ProductoEditar">Registrar Producto</a>
+	<a href="<%=getServletContext().getContextPath() %>/CategoriaEditar">Registrar Categoria</a>
+	<a href="<%=getServletContext().getContextPath() %>/ProveedorEditar">Registrar Proveedor</a>
 	<a href="<%=getServletContext().getContextPath()%>/CategoriaListar">Listar Categorias</a>
 	<a href="<%=getServletContext().getContextPath()%>/ProductoListar">Listar Productos</a>
 	<a href="<%=getServletContext().getContextPath()%>/ProveedorListar">Listar Proveedores</a>

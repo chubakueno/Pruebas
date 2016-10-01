@@ -11,8 +11,8 @@ import java.util.List;
  */
 @Entity
 @NamedQueries({
-@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c"),
-@NamedQuery(name="Category.findId", query="SELECT c FROM Category c WHERE c.idCategory= :id")
+@NamedQuery(name="findAllCategory", query="SELECT c FROM Category c"),
+@NamedQuery(name="findIdCategory", query="SELECT c FROM Category c WHERE c.idCategory= :id")
 }) 
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CategoriaDao;
-import dao.ProductoDao;
-import dao.ProveedorDao;
+import dao.Dao;
 import model.Category;
 import model.Product;
 import model.Provider;
@@ -37,10 +35,10 @@ public class ProductoEditar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			ProveedorDao proveedorDao = new ProveedorDao();
-			List<model.Provider> proveedores = proveedorDao.listar();
+			Dao<Provider> provider = new Dao<>(Provider.class);
+			List<model.Provider> proveedores = provider.listar();
 			
-			CategoriaDao categoriaDao = new CategoriaDao();
+			Dao<Category> categoriaDao = new Dao<>(Category.class);
 			List<model.Category> categorias = categoriaDao.listar();
 			
 			request.setAttribute("categorias", categorias);			
@@ -48,15 +46,14 @@ public class ProductoEditar extends HttpServlet {
 			
 			String productoID = request.getParameter("producto");
 			
-			ProductoDao producto = new ProductoDao();
+			Dao<Product> producto = new Dao<>(Product.class);
 			Product productoEntidad = producto.Buscar(Integer.parseInt(productoID));
 			
 			request.setAttribute("producto", productoEntidad);
 			
 			request.getRequestDispatcher("/admin/producto_editar.jsp").forward(request, response);
-			
 		} catch (Exception e) {
-			// TODO: handle exception
+			request.getRequestDispatcher("/admin/producto_agregar.jsp").forward(request, response);
 			System.out.println(e.getMessage());
 		}
 		
@@ -69,14 +66,15 @@ public class ProductoEditar extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			String nombre = request.getParameter("campoNombre");
+			String id = request.getParameter("id");
 			float monto = Float.parseFloat(request.getParameter("campoMonto"));
 			int proveedorId = Integer.parseInt(request.getParameter("listaProveedores"));
 			int categoriaId = Integer.parseInt(request.getParameter("listaCategorias"));
 			
-			ProveedorDao providerDao = new ProveedorDao();
+			Dao<Provider> providerDao = new Dao<>(Provider.class);
 			Provider p = providerDao.Buscar(proveedorId);
 			
-			CategoriaDao categoriaDao = new CategoriaDao();
+			Dao<Category> categoriaDao = new Dao<Category>(Category.class);
 			Category c = categoriaDao.Buscar(categoriaId);
 			
 			Product producto = new Product();
@@ -84,8 +82,8 @@ public class ProductoEditar extends HttpServlet {
 			producto.setMount(monto);
 			producto.setCategory(c);
 			producto.setProvider(p);
-			
-			ProductoDao dao = new ProductoDao();
+			producto.setIdProduct(Integer.parseInt(id));
+			Dao<Product> dao = new Dao<Product>(Product.class);
 			boolean flag = dao.actualizar(producto);
 			
 			if(flag){

@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ProductoDao;
+import dao.Dao;
+import model.Product;
 
 /**
  * Servlet implementation class ProductoEliminar
@@ -29,7 +30,7 @@ public class ProductoEliminar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			ProductoDao productoDao = new ProductoDao();
+			Dao<Product> productoDao = new Dao<Product>(Product.class);
 			boolean flag = productoDao.eliminar( Integer.parseInt(request.getParameter("producto")) );
 			
 			if(flag){

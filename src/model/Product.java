@@ -10,8 +10,8 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
-@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p"),
-@NamedQuery(name="Product.findId", query="SELECT p FROM Product p WHERE p.idProduct= :id")
+@NamedQuery(name="findAllProduct", query="SELECT p FROM Product p"),
+@NamedQuery(name="findIdProduct", query="SELECT p FROM Product p WHERE p.idProduct= :id")
 }) 
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
