@@ -1,29 +1,28 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale.Category;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Dao;
+import model.User;
 
 
 /**
- * Servlet implementation class CategoriaListar
+ * Servlet implementation class ServletUsuario
  */
-@WebServlet("/CategoriaListar")
-public class CategoriaListar extends HttpServlet {
+@WebServlet("/ServletUsuario")
+public class ServletUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CategoriaListar() {
+    public ServletUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +31,30 @@ public class CategoriaListar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try{
-			Dao<Category> categoriaDao = new Dao<Category>(Category.class);
-			List<Category> categorias = categoriaDao.listar();
-			
-			request.setAttribute("categorias", categorias);			
-			
-			request.getRequestDispatcher("/admin/categoria_listado.jsp").forward(request, response);
-			
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-		}
+		request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String codigo = request.getParameter("campoCorreo");
+		String contraseña = request.getParameter("campoClave");
+		if(codigo==""&&contraseña==""){
+			HttpSession sesion = request.getSession();
+			sesion.invalidate();
+		}
+		Dao<User> dao = new Dao<>(User.class);
+		User admin = dao.login(codigo, contraseña);
+		if(admin != null){
+			HttpSession sesion = request.getSession();
+			sesion.setAttribute("sesAdmin", admin);
+			request.getRequestDispatcher("/admin/principal.jsp").forward(request, response);
+		}else{
+			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+		}
 	}
 
 }

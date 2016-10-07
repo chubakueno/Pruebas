@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,14 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CategoriaDao;
-import dao.ICategoriaDao;
-import dao.IProductoDao;
-import dao.IProveedorDao;
-import dao.ProductoDao;
-import dao.ProveedorDao;
-import model.Category;
-import model.Product;
+import dao.Dao;
 import model.Provider;
 
 /**
@@ -43,7 +35,7 @@ public class ProveedorEditar extends HttpServlet {
 			
 			String proveedorID = request.getParameter("proveedor");
 			
-			IProveedorDao proveedor = new ProveedorDao();
+			Dao<Provider> proveedor = new Dao<>(Provider.class);
 			Provider proveedorEntidad = proveedor.Buscar(Integer.parseInt(proveedorID));
 			
 			request.setAttribute("proveedor", proveedorEntidad);
@@ -65,11 +57,13 @@ public class ProveedorEditar extends HttpServlet {
 
 		try{
 			String nombre = request.getParameter("campoNombre");
-
+			int id = Integer.parseInt(request.getParameter("campoID"));
+			
 			Provider proveedor  = new Provider();
 			proveedor.setName(nombre);
+			proveedor.setIdProvider(id);
 			
-			IProveedorDao dao = new ProveedorDao();
+			Dao<Provider> dao = new Dao<>(Provider.class);
 			boolean flag = dao.actualizar(proveedor);
 			
 			if(flag){

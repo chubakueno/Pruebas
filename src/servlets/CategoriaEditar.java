@@ -7,12 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CategoriaDao;
-import dao.ICategoriaDao;
-import dao.IProveedorDao;
-import dao.ProveedorDao;
+import dao.Dao;
 import model.Category;
-import model.Provider;
 
 /**
  * Servlet implementation class CategoriaEditar
@@ -34,10 +30,9 @@ public class CategoriaEditar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			
 			String categoriaID = request.getParameter("categoria");
 			
-			ICategoriaDao categoria = new CategoriaDao();
+			Dao<Category> categoria = new Dao<Category>(Category.class);
 			Category categoriaEntidad = categoria.Buscar(Integer.parseInt(categoriaID));
 			
 			request.setAttribute("categoria", categoriaEntidad);
@@ -54,8 +49,29 @@ public class CategoriaEditar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		try{
+			String nombre = request.getParameter("campoNombre");
+			int id = Integer.parseInt(request.getParameter("campoID"));
+			
+			Category categoria = new Category();
+			categoria.setName(nombre);
+			categoria.setIdCategory(id);
+			
+			Dao<Category> dao = new Dao<Category>(Category.class);
+			boolean flag = dao.actualizar(categoria);
+
+			if(flag){
+				request.setAttribute("mensaje", "Categoria actualizada");
+			}else{
+				request.setAttribute("mensaje", "Ocurrió un error");
+			}
+			
+			request.getRequestDispatcher("/admin/resultado.jsp").forward(request, response);
+			
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

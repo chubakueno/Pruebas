@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.IProductoDao;
-import dao.IProveedorDao;
-import dao.ProductoDao;
-import dao.ProveedorDao;
+import dao.Dao;
+import model.Provider;
 
 /**
  * Servlet implementation class ProveedorEliminar
@@ -32,7 +30,7 @@ public class ProveedorEliminar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			IProveedorDao proveedorDao = new ProveedorDao();
+			Dao<Provider> proveedorDao = new Dao<>(Provider.class);
 			boolean flag = proveedorDao.eliminar( Integer.parseInt(request.getParameter("proveedor")) );
 			
 			if(flag){

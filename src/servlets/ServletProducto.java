@@ -9,12 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CategoriaDao;
-import dao.ICategoriaDao;
-import dao.IProductoDao;
-import dao.IProveedorDao;
-import dao.ProductoDao;
-import dao.ProveedorDao;
+import dao.Dao;
 import model.Category;
 import model.Product;
 import model.Provider;
@@ -40,10 +35,10 @@ public class ServletProducto extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try{
-			IProveedorDao proveedorDao = new ProveedorDao();
+			Dao<Provider> proveedorDao = new Dao<>(Provider.class);
 			List<model.Provider> proveedores = proveedorDao.listar();
 			
-			ICategoriaDao categoriaDao = new CategoriaDao();
+			Dao<Category> categoriaDao = new Dao<>(Category.class);
 			List<model.Category> categorias = categoriaDao.listar();
 			
 			request.setAttribute("categorias", categorias);			
@@ -66,10 +61,10 @@ public class ServletProducto extends HttpServlet {
 			int proveedorId = Integer.parseInt(request.getParameter("listaProveedores"));
 			int categoriaId = Integer.parseInt(request.getParameter("listaCategorias"));
 			
-			IProveedorDao providerDao = new ProveedorDao();
+			Dao<Provider> providerDao = new Dao<>(Provider.class);
 			Provider p = providerDao.Buscar(proveedorId);
 			
-			ICategoriaDao categoriaDao = new CategoriaDao();
+			Dao<Category> categoriaDao = new Dao<>(Category.class);
 			Category c = categoriaDao.Buscar(categoriaId);
 			
 			Product producto = new Product();
@@ -78,11 +73,11 @@ public class ServletProducto extends HttpServlet {
 			producto.setCategory(c);
 			producto.setProvider(p);
 			
-			IProductoDao dao = new ProductoDao();
+			Dao<Product> dao = new Dao<>(Product.class);
 			boolean flag = dao.agregar(producto);
 			
 			if(flag){
-				request.setAttribute("mensaje", "Producto guardado");
+				request.setAttribute("mensaje", "El producto se guardo satisfactoriamente");
 			}else{
 				request.setAttribute("mensaje", "Ocurrió un error");
 			}

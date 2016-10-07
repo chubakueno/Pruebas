@@ -1,23 +1,14 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CategoriaDao;
-import dao.ICategoriaDao;
-import dao.IProductoDao;
-import dao.IProveedorDao;
-import dao.ProductoDao;
-import dao.ProveedorDao;
+import dao.Dao;
 import model.Category;
-import model.Product;
-import model.Provider;
 
 /**
  * Servlet implementation class ServletCategoria
@@ -56,10 +47,10 @@ public class ServletCategoria extends HttpServlet {
 			String nombre = request.getParameter("campoNombre");
 			
 			Category categoria = new Category();
-			categoria.setName(nombre);			
+			categoria.setName(nombre);		
 			
 
-			ICategoriaDao categoriaDao = new CategoriaDao();
+			Dao<Category> categoriaDao = new Dao<Category>(Category.class);
 			boolean flag = categoriaDao.agregar(categoria);
 			
 			if(flag){

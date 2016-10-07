@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,14 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CategoriaDao;
-import dao.ICategoriaDao;
-import dao.IProductoDao;
-import dao.IProveedorDao;
-import dao.ProductoDao;
-import dao.ProveedorDao;
-import model.Category;
-import model.Product;
+import dao.Dao;
 import model.Provider;
 
 /**
@@ -61,7 +53,7 @@ public class ServletProveedor extends HttpServlet {
 			proveedor.setName(nombre);			
 			
 
-			IProveedorDao proveedorDao = new ProveedorDao();
+			Dao<Provider> proveedorDao = new Dao<>(Provider.class);
 			boolean flag = proveedorDao.agregar(proveedor);
 			
 			if(flag){
