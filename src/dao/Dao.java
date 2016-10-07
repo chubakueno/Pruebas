@@ -37,16 +37,13 @@ public class Dao<T>{
 			String querystmt="select * from user"
 					+ " where Username='"+codigo+"' and Pass='"+contraseña+"' ";
 			ResultSet rs = stmt.executeQuery(querystmt);
-			System.out.println(querystmt);
 			if(rs.next()){
-				System.out.println("ok");
 				admin = new User();
 				admin.setIdUser(rs.getInt("idUser"));
 				admin.setUsername(rs.getString("Username"));
 				admin.setPass(rs.getString("Pass"));
 				admin.setRole(rs.getString("Role"));
 			}
-			System.out.println(":/");
 			rs.close();
 			con.close();	
 		} catch (Exception e) {

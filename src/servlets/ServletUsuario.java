@@ -42,16 +42,17 @@ public class ServletUsuario extends HttpServlet {
 		
 		String codigo = request.getParameter("campoCorreo");
 		String contraseña = request.getParameter("campoClave");
-		
+		if(codigo==""&&contraseña==""){
+			HttpSession sesion = request.getSession();
+			sesion.invalidate();
+		}
 		Dao<User> dao = new Dao<>(User.class);
-		System.out.println(codigo+"/"+contraseña);
 		User admin = dao.login(codigo, contraseña);
 		if(admin != null){
 			HttpSession sesion = request.getSession();
 			sesion.setAttribute("sesAdmin", admin);
-			request.getRequestDispatcher("/Principal").forward(request, response);
+			request.getRequestDispatcher("/admin/principal.jsp").forward(request, response);
 		}else{
-			
 			request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
 		}
 	}
