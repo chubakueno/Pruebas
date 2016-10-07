@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
   `idCategory` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(45) DEFAULT NULL,
+  `Name` varchar(45) NOT NULL,
   PRIMARY KEY (`idCategory`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -35,7 +35,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'hola'),(2,'Silla'),(3,'JLKKH'),(4,'Catn2'),(5,'dfa'),(6,'sadfff'),(7,'adfs'),(8,''),(9,''),(12,'Mueble');
+INSERT INTO `category` VALUES (1,'hola'),(2,'Silla'),(3,'JLKKH'),(4,'Catn2'),(5,'dfa'),(6,'sadfff'),(7,'adfs'),(12,'Mueble');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,8 +48,8 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product` (
   `idProduct` int(11) NOT NULL AUTO_INCREMENT,
-  `Description` varchar(45) DEFAULT NULL,
-  `Mount` float DEFAULT NULL,
+  `Description` varchar(45) NOT NULL,
+  `Mount` float NOT NULL,
   `Category_idCategory` int(11) NOT NULL,
   `Provider_idProvider` int(11) NOT NULL,
   PRIMARY KEY (`idProduct`),
@@ -79,7 +79,7 @@ DROP TABLE IF EXISTS `provider`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `provider` (
   `idProvider` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(45) DEFAULT NULL,
+  `Name` varchar(45) NOT NULL,
   PRIMARY KEY (`idProvider`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -103,9 +103,9 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `idUser` int(11) NOT NULL AUTO_INCREMENT,
-  `Username` varchar(45) DEFAULT NULL,
-  `Pass` varchar(45) DEFAULT NULL,
-  `Role` varchar(45) DEFAULT NULL,
+  `Username` varchar(45) NOT NULL,
+  `Pass` varchar(45) NOT NULL,
+  `Role` varchar(45) NOT NULL,
   PRIMARY KEY (`idUser`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -129,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-06 20:06:58
+-- Dump completed on 2016-10-06 22:38:16
