@@ -41,13 +41,13 @@ public class ServletUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String codigo = request.getParameter("campoCorreo");
-		String contraseña = request.getParameter("campoClave");
-		if(codigo==""&&contraseña==""){
+		String contrasena = request.getParameter("campoClave");
+		if(codigo==""&&contrasena==""){
 			HttpSession sesion = request.getSession();
 			sesion.invalidate();
 		}
 		Dao<User> dao = new Dao<>(User.class);
-		User admin = dao.login(codigo, contraseña);
+		User admin = dao.login(codigo, contrasena);
 		if(admin != null){
 			HttpSession sesion = request.getSession();
 			sesion.setAttribute("sesAdmin", admin);

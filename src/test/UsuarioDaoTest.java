@@ -49,9 +49,9 @@ public class UsuarioDaoTest {
     	try {
         	usuario = new User();
         	String codigo = "admin";
-        	String contraseña = "admin";
+        	String contrasena = "admin";
         	
-        	assertTrue(usuarioDao.login(codigo, contraseña)!=null);
+        	assertTrue(usuarioDao.login(codigo, contrasena)!=null);
     	} catch (Exception e) {
         	e.printStackTrace();
         	fail("Ocurrio un error "+ e.getMessage());
