@@ -29,13 +29,13 @@ public class Dao<T>{
 		}
 		return conexion;
 	}
-	public User login(String codigo, String contraseña) {	
+	public User login(String codigo, String contrasena) {	
 		User admin = null;
 		try {
 			Connection con = Dao.obtenerConexion();
 			Statement stmt = con.createStatement();
 			String querystmt="select * from user"
-					+ " where Username='"+codigo+"' and Pass='"+contraseña+"' ";
+					+ " where Username='"+codigo+"' and Pass='"+contrasena+"' ";
 			ResultSet rs = stmt.executeQuery(querystmt);
 			if(rs.next()){
 				admin = new User();
