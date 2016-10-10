@@ -4,6 +4,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import javax.persistence.RollbackException;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -111,5 +113,14 @@ public class ProveedorDaoTest {
         	fail("Ocurrio un error: "+e.getMessage());
     	}
 	}
-
+	@org.junit.Test
+	public void f_testInsertarEmpty(){
+    	System.out.println("insertarEmpty");
+        proveedor = new Provider();   
+        try{
+        	proveedorDao.agregar(proveedor);
+        }catch(Exception e){
+        	assertTrue(e.getClass()==RollbackException.class);
+        }
+    }
 }

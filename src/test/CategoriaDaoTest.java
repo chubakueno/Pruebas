@@ -3,6 +3,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import javax.persistence.RollbackException;
+
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -107,4 +109,14 @@ public class CategoriaDaoTest {
     	}
 	}
 	
+	@org.junit.Test
+	public void f_testInsertarEmpty(){
+    	System.out.println("insertarEmpty");
+        categoria = new Category();   
+        try{
+        	categoriaDao.agregar(categoria);
+        }catch(Exception e){
+        	assertTrue(e.getClass()==RollbackException.class);
+        }
+    }
 }

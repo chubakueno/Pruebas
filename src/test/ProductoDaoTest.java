@@ -3,6 +3,8 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import javax.persistence.RollbackException;
+
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 import dao.Dao;
@@ -115,6 +117,15 @@ public class ProductoDaoTest {
         	fail("Ocurrio un error: "+e.getMessage());
     	}
 	}
-	
+	@org.junit.Test
+	public void f_testInsertarEmpty(){
+    	System.out.println("insertarEmpty");
+        producto = new Product();   
+        try{
+        	productoDao.agregar(producto);
+        }catch(Exception e){
+        	assertTrue(e.getClass()==RollbackException.class);
+        }
+    }
 	
 }

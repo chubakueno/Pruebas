@@ -51,24 +51,16 @@ public class Dao<T>{
 		}
 		return admin;	
 	}
-	public boolean agregar(T categoria) {
-		try {
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");
-			EntityManager em = emf.createEntityManager();
+	public boolean agregar(T categoria) throws Exception {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Laboratorio");
+		EntityManager em = emf.createEntityManager();
 			
-			EntityTransaction et = em.getTransaction();
-			et.begin();
-			em.persist(categoria);
-			et.commit();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.persist(categoria);
+		et.commit();
 			
-			return true;
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.print(e.getMessage());
-			
-			return false;
-		}
+		return true;
 	}
 	public boolean eliminar(int id) {
 		try {
