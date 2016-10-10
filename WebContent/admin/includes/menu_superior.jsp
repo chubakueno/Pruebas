@@ -18,7 +18,7 @@
 	<div id="navbar" class="navbar-collapse collapse">
 		<ul class="nav navbar-nav navbar-right">
 			<li><a
-				href="<%=getServletContext().getContextPath()%>/Principal">Inicio</a></li>
+				href="<%=getServletContext().getContextPath()%>/admin/principal.jsp">Inicio</a></li>
 			<li><a onclick="cerrarSesion()">Cerrar sesión</a></li>
 		</ul>
 	</div>
